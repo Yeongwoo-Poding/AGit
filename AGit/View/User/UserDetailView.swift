@@ -8,88 +8,129 @@
 import SwiftUI
 
 struct UserDetailView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
     
     var user: User
-    @Binding var hasBackButton: Bool
     
     var body: some View {
         VStack {
-            NavigationBarView(title: user.nickname, hasBackButton: true)
-            
-            HStack(spacing: 30) {
-                Image("defaultImage")
-                    .resizable()
-                    .frame(width: screenWidth/2.5, height: screenWidth/2.5)
-                    .clipShape(Circle())
+            ZStack {
+                Color("Background")
                 
                 VStack{
-                    VStack{
-                        Text("오늘 공부 시간")
-                        Text(secondToTime(second: user.todayStudyTime))
-                    }
-                    .padding()
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 120, height: 50)
-                            .foregroundColor(Color("primary"))
-                    }
-                    
-                    VStack{
-                        Text("평균 공부 시간")
-                        Text(secondToTime(second: user.totalStudyTime/user.days))
-                    }
-                    .padding()
-                    .background{
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: 120, height: 50)
-                            .foregroundColor(Color("primary"))
-                    }
-                }
-            }
-            .padding()
-            
-            ScrollView(.horizontal){
-                HStack{
-                    if user.tags != nil{
-                        ForEach(user.tags!, id: \.self){ tag in
-                            Text(tag)
-                                .padding(.vertical, 10)
-                                .padding(.horizontal)
-                                .background{
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .foregroundColor(Color("primary"))
-                                }
+                    HStack {
+                        ZStack {
+                            Circle()
+                                .foregroundColor(user.isStudying ? Color("Primary") : Color("Secondary"))
+                                .frame(width: screenWidth/2.5)
+                            
+                            Image("defaultImage")
+                                .resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                                .frame(width: screenWidth/3)
                         }
-                    }
-                }
-            }
-            .padding()
-            
-            VStack{
-                if user.links != nil{
-                    ForEach(user.links!, id: \.self){ link in
-                        Button(action: {
-                            print(link.linkUrl)
-                            openURL(URL(string: link.linkUrl)!)
-                        }) {
+                        
+                        VStack{
                             ZStack{
-                                RoundedRectangle(cornerRadius: 5)
-                                    .frame(width: screenWidth*4/5, height: 30)
-                                    .foregroundColor(Color("gray"))
-                                Text(link.linkDescription)
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color("Secondary"))
+                                    .frame(height: 50)
+                                
+                                VStack {
+                                    Text("오늘 공부 시간")
+                                    
+                                    Text(secondToTime(second: user.todayStudyTime))
+                                }
+                            }
+                            
+                            Spacer().frame(height: 15)
+                            
+                            ZStack{
+                                RoundedRectangle(cornerRadius: 10)
+                                    .foregroundColor(Color("Secondary"))
+                                    .frame(height: 50)
+                                
+                                VStack {
+                                    Text("평균 공부 시간")
+                                    
+                                    Text(secondToTime(second: user.totalStudyTime/user.days))
+                                }
                             }
                         }
                     }
+                    .frame(height: 200)
+                    
+                    ScrollView(.horizontal){
+                        HStack{
+                            if user.tags != nil{
+                                ForEach(user.tags!, id: \.self){ tag in
+                                    Text(tag)
+                                        .padding(.vertical, 10)
+                                        .padding(.horizontal)
+                                        .background{
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .foregroundColor(Color("Secondary"))
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    .padding()
+                    .frame(height: 50)
+                    
+                    HStack{
+                        Text("Links")
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 30)
+                    
+                    ScrollView{
+                        VStack(spacing: 5){
+                            if user.links != nil{
+                                ForEach(user.links!, id: \.self){ link in
+                                    Button(action: {
+                                        print(link.linkUrl)
+                                        openURL(URL(string: link.linkUrl)!)
+                                    }) {
+                                        ZStack{
+                                            RoundedRectangle(cornerRadius: 5)
+                                                .frame(width: screenWidth*4/5, height: 30)
+                                                .foregroundColor(Color("Secondary"))
+                                            Text(link.linkDescription)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    Spacer()
                 }
+                .padding()
             }
             
-            Spacer()
+            Color.black
+                .frame(height: 5)
         }
+        .navigationTitle(user.nickname)
+        .navigationBarTitleDisplayMode(.large)
         .font(.custom(fontStyle, size: bodyFontSize))
-        .foregroundColor(Color("black"))
-        .navigationBarHidden(true)
+        .foregroundColor(Color("White"))
+        .navigationBarBackButtonHidden(true)
+            .navigationBarItems(
+                leading: Button(action: {  presentationMode.wrappedValue.dismiss() }, label: {
+                    HStack(spacing: 2) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(Color("White"))
+
+                        Text("Back")
+                            .foregroundColor(Color("White"))
+                    }
+                })
+            )
     }
 }
 
@@ -98,5 +139,5 @@ struct UserDetailView_Previews: PreviewProvider {
     @State static var hasBackButton = true
     
     static var previews: some View {
-        UserDetailView(user: user, hasBackButton: $hasBackButton)
+        UserDetailView(user: user)
     }}

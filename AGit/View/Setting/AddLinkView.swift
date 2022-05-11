@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddLinkView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userModel: UserModel
     
     @Binding var isAddingLink: Bool
@@ -17,17 +18,32 @@ struct AddLinkView: View {
     @State var linkUrl = ""
     
     var body: some View {
-        VStack{
-            NavigationBarView(title: "Add Link", hasBackButton: true)
+        ZStack {
+            Color("Background")
             
-            Spacer()
-            
-            VStack(spacing: 30){
-                TextField("type", text: $linkType)
+            VStack(spacing: 20){
+//                TextField("type", text: $linkType)
+//                    .padding()
+//                    .background{
+//                        RoundedRectangle(cornerRadius: 20)
+//                            .foregroundColor(Color("Secondary"))
+//                    }
+                
                 TextField("description", text: $linkDescription)
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("Secondary"))
+                    }
+                
                 TextField("url", text: $linkUrl){
                     userModel.addUserLink(linkType: linkType, linkDescription: linkDescription, linkUrl: linkUrl)
                     isAddingLink = false
+                }
+                .padding()
+                .background{
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundColor(Color("Secondary"))
                 }
                 
                 Button(action: {
@@ -35,19 +51,32 @@ struct AddLinkView: View {
                     isAddingLink = false
                 }) {
                     Text("Submit")
+                        .foregroundColor(Color("Black"))
                         .frame(width: 120, height: 50)
                         .background{
                             RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color("primary"))
+                                .foregroundColor(Color("Primary"))
                         }
                 }
             }
             .padding()
-            
-            Spacer()
         }
+        .navigationTitle("Add Link")
+        .navigationBarTitleDisplayMode(.large)
         .font(.custom(fontStyle, size: bodyFontSize))
-        .foregroundColor(Color("black"))
+        .foregroundColor(Color("White"))
+        .navigationBarBackButtonHidden(true)
+            .navigationBarItems(
+                leading: Button(action: {  presentationMode.wrappedValue.dismiss() }, label: {
+                    HStack(spacing: 2) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(Color("White"))
+
+                        Text("Back")
+                            .foregroundColor(Color("White"))
+                    }
+                })
+            )
     }
 }
 

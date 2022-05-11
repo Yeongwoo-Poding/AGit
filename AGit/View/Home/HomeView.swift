@@ -13,66 +13,77 @@ struct HomeView: View {
     @State var incTime = 0
     
     var body: some View {
-        VStack{
-            NavigationBarView(title: "Home", hasBackButton: false)
-            Spacer()
-            
-            VStack{
-                Button(action: {
-                    incTime = 0
+        NavigationView{
+            VStack {
+                ZStack {
+                    Color("Background")
                     
-                    if userModel.user != nil{
-                        userModel.updateUser()
+                    VStack{
+                        if userModel.user != nil && userModel.user!.isStudying{
+                            Image("custom.bulb.on")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 350)
+                                .onTapGesture {
+                                    incTime = 0
+                                    userModel.updateUser()
+                                }
+                        }else{
+                            Image("custom.bulb.off")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 350)
+                                .onTapGesture {
+                                    userModel.updateUser()
+                                }
+                        }
+                        
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color("Secondary"))
+                                .frame(width: screenWidth*5/6, height: 50)
+                            
+                            VStack {
+                                Text("현재 공부 시간")
+                                
+                                if let user = userModel.user{
+                                    Text(secondToTime(second: user.curStudyTime + incTime))
+                                }
+                            }
+                        }
+                        
+                        Spacer().frame(height: 15)
+                        
+                        ZStack{
+                            RoundedRectangle(cornerRadius: 10)
+                                .foregroundColor(Color("Secondary"))
+                                .frame(width: screenWidth*5/6, height: 50)
+                            
+                            VStack {
+                                Text("오늘 공부 시간")
+                                
+                                if let user = userModel.user{
+                                    Text(secondToTime(second: user.todayStudyTime + incTime))
+                                }
+                            }
+                        }
+                        
+                        Spacer()
                     }
-                }) {
-                        Image(systemName: "lightbulb.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 100)
-                            .foregroundColor(Color("white"))
-                            .background{
-                                RoundedRectangle(cornerRadius: 50)
-                                    .frame(width: 200, height: 200)
-                                    .foregroundColor(userModel.user != nil ? (userModel.user!.isStudying ? Color("primary") : Color("gray")) : Color("gray"))
-                    }
-                }
-            }
-            
-            Spacer().frame(height: 100)
-            
-            HStack{
-                VStack{
-                    Text("현재 공부 시간")
-                    Text(secondToTime(second: userModel.user != nil ? (userModel.user!.curStudyTime + incTime) : 0))
-                }
-                .padding()
-                .background{
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 120, height: 50)
-                        .foregroundColor(Color("gray"))
                 }
                 
-                VStack{
-                    Text("오늘 공부 시간")
-                    Text(secondToTime(second: userModel.user != nil ? (userModel.user!.todayStudyTime + incTime) : 0))
-                }
-                .padding()
-                .background{
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(width: 120, height: 50)
-                        .foregroundColor(Color("gray"))
-                }
+                Color.black
+                    .frame(height: 5)
             }
-            .onReceive(timer) { _ in
+            .onReceive(timer, perform: { _ in
                 if userModel.user != nil && userModel.user!.isStudying{
-                    incTime+=1
+                    incTime += 1
                 }
-            }
-            
-            Spacer()
+            })
+            .navigationTitle("Home")
         }
         .font(.custom(fontStyle, size: bodyFontSize))
-        .foregroundColor(Color("black"))
+        .foregroundColor(Color("White"))
     }
 }
 

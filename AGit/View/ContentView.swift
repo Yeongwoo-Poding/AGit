@@ -8,24 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @EnvironmentObject var userModel: UserModel
     
     @State var tabBarIndex = 0
-    @State var navBarTitle = "HomeView"
-    @State var hasBackButton = false
     
     var body: some View {
-        VStack{
-            if tabBarIndex == 0{
-                HomeView()
-            }else if tabBarIndex == 1{
-                UserView(hasBackButton: $hasBackButton)
-            }else{
-                SettingView(hasBackButton: $hasBackButton)
-            }
+        TabView(selection: $tabBarIndex){
+            HomeView()
+                .tabItem {
+                    Image(systemName: "house")
+                }
+                .tag(0)
             
-            TabBarView(tabBarIndex: $tabBarIndex, navBarTitle: $navBarTitle)
+            UserView()
+                .tabItem {
+                    Image(systemName: "person.3")
+                }
+                .tag(1)
+            
+            SettingView()
+                .tabItem {
+                    Image(systemName: "gear")
+                }
+                .tag(2)
+        }
+        .onChange(of: tabBarIndex) { idx in
+            if idx==1{
+                userModel.loadUserList()
+            }
         }
     }
 }

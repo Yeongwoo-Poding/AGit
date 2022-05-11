@@ -19,12 +19,6 @@
 		DA227084282A5258009CC667 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22706D282A5258009CC667 /* HomeView.swift */; };
 		DA227085282A5258009CC667 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22706D282A5258009CC667 /* HomeView.swift */; };
 		DA227086282A5258009CC667 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22706D282A5258009CC667 /* HomeView.swift */; };
-		DA227087282A5258009CC667 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22706F282A5258009CC667 /* NavigationBarView.swift */; };
-		DA227088282A5258009CC667 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22706F282A5258009CC667 /* NavigationBarView.swift */; };
-		DA227089282A5258009CC667 /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22706F282A5258009CC667 /* NavigationBarView.swift */; };
-		DA22708A282A5258009CC667 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA227070282A5258009CC667 /* TabBarView.swift */; };
-		DA22708B282A5258009CC667 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA227070282A5258009CC667 /* TabBarView.swift */; };
-		DA22708C282A5258009CC667 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA227070282A5258009CC667 /* TabBarView.swift */; };
 		DA22708D282A5258009CC667 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA227071282A5258009CC667 /* LaunchScreenView.swift */; };
 		DA22708E282A5258009CC667 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA227071282A5258009CC667 /* LaunchScreenView.swift */; };
 		DA22708F282A5258009CC667 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA227071282A5258009CC667 /* LaunchScreenView.swift */; };
@@ -55,8 +49,10 @@
 		DA2270A8282A5258009CC667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22707D282A5258009CC667 /* ContentView.swift */; };
 		DA2270A9282A5258009CC667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22707D282A5258009CC667 /* ContentView.swift */; };
 		DA2270AA282A5258009CC667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA22707D282A5258009CC667 /* ContentView.swift */; };
+		DA2270AD282A5E63009CC667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA2270AC282A5E63009CC667 /* Assets.xcassets */; };
+		DA2270AE282A5E63009CC667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA2270AC282A5E63009CC667 /* Assets.xcassets */; };
+		DA2270AF282A5E63009CC667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA2270AC282A5E63009CC667 /* Assets.xcassets */; };
 		DACA4CB2282A4FA6009DEAD3 /* AGitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACA4CB1282A4FA6009DEAD3 /* AGitApp.swift */; };
-		DACA4CB6282A4FA7009DEAD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DACA4CB5282A4FA7009DEAD3 /* Assets.xcassets */; };
 		DACA4CB9282A4FA7009DEAD3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DACA4CB8282A4FA7009DEAD3 /* Preview Assets.xcassets */; };
 		DACA4CC3282A4FA7009DEAD3 /* AGitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACA4CC2282A4FA7009DEAD3 /* AGitTests.swift */; };
 		DACA4CCD282A4FA7009DEAD3 /* AGitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACA4CCC282A4FA7009DEAD3 /* AGitUITests.swift */; };
@@ -85,8 +81,6 @@
 		DA227069282A5258009CC667 /* Setting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		DA22706A282A5258009CC667 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DA22706D282A5258009CC667 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		DA22706F282A5258009CC667 /* NavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
-		DA227070282A5258009CC667 /* TabBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		DA227071282A5258009CC667 /* LaunchScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		DA227073282A5258009CC667 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		DA227074282A5258009CC667 /* UserCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
@@ -98,9 +92,9 @@
 		DA22707C282A5258009CC667 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		DA22707D282A5258009CC667 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		DA2270AB282A526B009CC667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DA2270AC282A5E63009CC667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DACA4CAE282A4FA6009DEAD3 /* AGit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AGit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACA4CB1282A4FA6009DEAD3 /* AGitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGitApp.swift; sourceTree = "<group>"; };
-		DACA4CB5282A4FA7009DEAD3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DACA4CB8282A4FA7009DEAD3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DACA4CBE282A4FA7009DEAD3 /* AGitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AGitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACA4CC2282A4FA7009DEAD3 /* AGitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AGitTests.swift; sourceTree = "<group>"; };
@@ -154,12 +148,12 @@
 		DA22706B282A5258009CC667 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DA22706C282A5258009CC667 /* Home */,
+				DA22707D282A5258009CC667 /* ContentView.swift */,
 				DA22706E282A5258009CC667 /* Component */,
+				DA22706C282A5258009CC667 /* Home */,
 				DA227072282A5258009CC667 /* User */,
 				DA227076282A5258009CC667 /* Setting */,
 				DA22707A282A5258009CC667 /* authentication */,
-				DA22707D282A5258009CC667 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -175,8 +169,6 @@
 		DA22706E282A5258009CC667 /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				DA22706F282A5258009CC667 /* NavigationBarView.swift */,
-				DA227070282A5258009CC667 /* TabBarView.swift */,
 				DA227071282A5258009CC667 /* LaunchScreenView.swift */,
 			);
 			path = Component;
@@ -195,9 +187,9 @@
 		DA227076282A5258009CC667 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				DA227079282A5258009CC667 /* SettingView.swift */,
 				DA227077282A5258009CC667 /* ProfileView.swift */,
 				DA227078282A5258009CC667 /* AddLinkView.swift */,
-				DA227079282A5258009CC667 /* SettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -236,10 +228,10 @@
 			children = (
 				DA2270AB282A526B009CC667 /* Info.plist */,
 				DACA4CB1282A4FA6009DEAD3 /* AGitApp.swift */,
+				DA2270AC282A5E63009CC667 /* Assets.xcassets */,
 				DA227063282A5242009CC667 /* Font */,
 				DA227068282A5258009CC667 /* Model */,
 				DA22706B282A5258009CC667 /* View */,
-				DACA4CB5282A4FA7009DEAD3 /* Assets.xcassets */,
 				DACA4CB7282A4FA7009DEAD3 /* Preview Content */,
 			);
 			path = AGit;
@@ -375,8 +367,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DACA4CB9282A4FA7009DEAD3 /* Preview Assets.xcassets in Resources */,
+				DA2270AD282A5E63009CC667 /* Assets.xcassets in Resources */,
 				DA227065282A5242009CC667 /* LeeSeoyun.otf in Resources */,
-				DACA4CB6282A4FA7009DEAD3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +376,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2270AE282A5E63009CC667 /* Assets.xcassets in Resources */,
 				DA227066282A5242009CC667 /* LeeSeoyun.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +385,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA2270AF282A5E63009CC667 /* Assets.xcassets in Resources */,
 				DA227067282A5242009CC667 /* LeeSeoyun.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,14 +405,12 @@
 				DA227090282A5258009CC667 /* UserView.swift in Sources */,
 				DACA4CB2282A4FA6009DEAD3 /* AGitApp.swift in Sources */,
 				DA227081282A5258009CC667 /* User.swift in Sources */,
-				DA22708A282A5258009CC667 /* TabBarView.swift in Sources */,
 				DA227093282A5258009CC667 /* UserCellView.swift in Sources */,
 				DA2270A2282A5258009CC667 /* SignInView.swift in Sources */,
 				DA22709F282A5258009CC667 /* SettingView.swift in Sources */,
 				DA227096282A5258009CC667 /* UserDetailView.swift in Sources */,
 				DA227099282A5258009CC667 /* ProfileView.swift in Sources */,
 				DA22709C282A5258009CC667 /* AddLinkView.swift in Sources */,
-				DA227087282A5258009CC667 /* NavigationBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,14 +426,12 @@
 				DA227091282A5258009CC667 /* UserView.swift in Sources */,
 				DACA4CC3282A4FA7009DEAD3 /* AGitTests.swift in Sources */,
 				DA227082282A5258009CC667 /* User.swift in Sources */,
-				DA22708B282A5258009CC667 /* TabBarView.swift in Sources */,
 				DA227094282A5258009CC667 /* UserCellView.swift in Sources */,
 				DA2270A3282A5258009CC667 /* SignInView.swift in Sources */,
 				DA2270A0282A5258009CC667 /* SettingView.swift in Sources */,
 				DA227097282A5258009CC667 /* UserDetailView.swift in Sources */,
 				DA22709A282A5258009CC667 /* ProfileView.swift in Sources */,
 				DA22709D282A5258009CC667 /* AddLinkView.swift in Sources */,
-				DA227088282A5258009CC667 /* NavigationBarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,13 +441,11 @@
 			files = (
 				DA227083282A5258009CC667 /* User.swift in Sources */,
 				DACA4CCD282A4FA7009DEAD3 /* AGitUITests.swift in Sources */,
-				DA22708C282A5258009CC667 /* TabBarView.swift in Sources */,
 				DA2270A1282A5258009CC667 /* SettingView.swift in Sources */,
 				DA227095282A5258009CC667 /* UserCellView.swift in Sources */,
 				DA22709B282A5258009CC667 /* ProfileView.swift in Sources */,
 				DA22709E282A5258009CC667 /* AddLinkView.swift in Sources */,
 				DA2270AA282A5258009CC667 /* ContentView.swift in Sources */,
-				DA227089282A5258009CC667 /* NavigationBarView.swift in Sources */,
 				DACA4CCF282A4FA7009DEAD3 /* AGitUITestsLaunchTests.swift in Sources */,
 				DA2270A4282A5258009CC667 /* SignInView.swift in Sources */,
 				DA227086282A5258009CC667 /* HomeView.swift in Sources */,

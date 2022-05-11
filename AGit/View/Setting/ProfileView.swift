@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var userModel: UserModel
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.openURL) var openURL
     
     @State var isAddingTag = false
@@ -18,179 +19,212 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            NavigationBarView(title: userModel.user?.nickname ?? "Guest", hasBackButton: true)
-            
-            HStack(spacing: 30) {
-                Image("defaultImage")
-                    .resizable()
-                    .frame(width: screenWidth/3, height: screenWidth/3)
-                    .clipShape(Circle())
-                    
+            ZStack {
+                Color("Background")
                 
                 if let user = userModel.user{
                     VStack{
-                        VStack{
-                            Text("오늘 공부 시간")
-                            Text(secondToTime(second: user.todayStudyTime))
-                        }
-                        .padding()
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 120, height: 50)
-                                .foregroundColor(Color("primary"))
-                        }
-                        
-                        VStack{
-                            Text("평균 공부 시간")
-                            Text(secondToTime(second: user.totalStudyTime/user.days))
-                        }
-                        .padding()
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .frame(width: 120, height: 50)
-                                .foregroundColor(Color("primary"))
-                        }
-                    }
-                }
-            }
-            .padding()
-            
-            ScrollView(.horizontal){
-                HStack{
-                    if userModel.user != nil && userModel.user!.tags != nil{
-                        ForEach(userModel.user!.tags!, id: \.self){ tag in
-                            ZStack(alignment: .leading){
-                                Text(tag)
-                                    .padding(.vertical, 10)
-                                    .padding(.horizontal)
-                                    .background{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(Color("primary"))
-                                    }
-                                    .onTapGesture {
-                                        isDeletingTag = true
-                                    }
+                        HStack {
+                            ZStack {
+                                Circle()
+                                    .foregroundColor(user.isStudying ? Color("Primary") : Color("Secondary"))
+                                    .frame(width: screenWidth/2.5)
                                 
-                                if isDeletingTag{
-                                    Button(action: {
-                                        userModel.deleteUserTag(tag: tag)
-                                    }) {
-                                        Image(systemName: "x.circle.fill")
-                                    }
-                                    .offset(x: -2, y: -12)
-                                }
-                            }
-                        }
-                    }
-                    
-                    if isAddingTag{
-                        HStack {
-                            Text("#")
-                            TextField("태그", text: $addTag){
-                                userModel.addUserTag(tag: addTag)
-                                addTag = ""
-                                isAddingTag = false
-                            }
-                        }
-                        .padding(.vertical, 10)
-                        .padding(.horizontal)
-                        .background{
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(Color("primary"))
-                        }
-                    }else{
-                        if !isDeletingTag{
-                            Button(action: {
-                                isAddingTag = true
-                            }) {
-                                Text(" 태그 추가 ")
-                                    .padding(.vertical, 10)
-                                    .padding(.horizontal)
-                                    .background{
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .foregroundColor(Color("primary"))
-                                    }
-                            }
-                        }
-                    }
-                }
-            }
-            .padding(.top)
-            .padding(.horizontal)
-            
-            if isDeletingTag {
-                Button(action: {
-                    isDeletingTag = false
-                }) {
-                    Text("완료")
-                        .padding(.vertical, 10)
-                        .padding(.horizontal, 30)
-                        .background{
-                            RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(Color("gray"))
-                        }
-                        .frame(height: 40)
-                }
-            }else{
-                HStack{
-                    Text("Links")
-                        .frame(height: 40)
-                    
-                    Spacer()
-                }
-                .padding(.horizontal, 30)
-            }
-            
-            if userModel.user != nil && userModel.user!.links != nil{
-                ScrollView{
-                    ForEach(userModel.user!.links!, id: \.self){ link in
-                        HStack {
-                            Button(action: {
-                                print(link.linkUrl)
-                                openURL(URL(string: link.linkUrl)!)
-                            }) {
-                                ZStack{
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .frame(width: screenWidth*4/5, height: 30)
-                                        .foregroundColor(Color("gray"))
-                                    Text(link.linkDescription)
-                                }
+                                Image("defaultImage")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(Circle())
+                                    .frame(width: screenWidth/3)
                             }
                             
-                            Button(action: {
-                                userModel.deleteUserLink(linkUrl: link.linkUrl)
-                            }) {
-                                Image(systemName: "x.circle.fill")
+                            VStack{
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(Color("Secondary"))
+                                        .frame(height: 50)
+                                    
+                                    VStack {
+                                        Text("오늘 공부 시간")
+                                        
+                                        Text(secondToTime(second: user.todayStudyTime))
+                                    }
+                                }
+                                
+                                Spacer().frame(height: 15)
+                                
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .foregroundColor(Color("Secondary"))
+                                        .frame(height: 50)
+                                    
+                                    VStack {
+                                        Text("평균 공부 시간")
+                                        
+                                        Text(secondToTime(second: user.totalStudyTime/user.days))
+                                    }
+                                }
                             }
                         }
+                        .frame(height: 200)
+                        
+                        ScrollView(.horizontal){
+                            HStack{
+                                if user.tags != nil{
+                                    ForEach(user.tags!, id: \.self){ tag in
+                                        ZStack(alignment: .leading) {
+                                            Text(tag)
+                                                .padding(.vertical, 10)
+                                                .padding(.horizontal)
+                                                .background{
+                                                    RoundedRectangle(cornerRadius: 5)
+                                                        .foregroundColor(Color("Secondary"))
+                                                }
+                                                .onTapGesture {
+                                                    isDeletingTag = true
+                                                }
+                                            
+                                            if isDeletingTag{
+                                                Button(action: {
+                                                    userModel.deleteUserTag(tag: tag)
+                                                }) {
+                                                    Image(systemName: "x.circle.fill")
+                                                        .background(Color("Secondary"))
+                                                }
+                                                .offset(x: 7)
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                if isAddingTag{
+                                    HStack {
+                                        Text("#")
+                                        TextField("태그", text: $addTag){
+                                            userModel.addUserTag(tag: addTag)
+                                            addTag = ""
+                                            isAddingTag = false
+                                        }
+                                    }
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal)
+                                    .background{
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(Color("Secondary"))
+                                    }
+                                }else{
+                                    if !isDeletingTag{
+                                        Button(action: {
+                                            isAddingTag = true
+                                        }) {
+                                            Text(" 태그 추가 ")
+                                                .padding(.vertical, 10)
+                                                .padding(.horizontal)
+                                                .background{
+                                                    RoundedRectangle(cornerRadius: 5)
+                                                        .foregroundColor(Color("Secondary"))
+                                                }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                        .padding(.top)
+                        
+                        if isDeletingTag {
+                            Button(action: {
+                                isDeletingTag = false
+                            }) {
+                                Text("완료")
+                                    .padding(.vertical, 10)
+                                    .padding(.horizontal, 30)
+                                    .background{
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .foregroundColor(Color("Secondary"))
+                                    }
+                            }
+                            .frame(height: 50)
+                        }else{
+                            Spacer().frame(height: 65)
+                        }
+                        
+                        HStack{
+                            Text("Links")
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 30)
+                        
+                        ScrollView{
+                            VStack(spacing: 5){
+                                if user.links != nil{
+                                    ForEach(user.links!, id: \.self){ link in
+                                        HStack{
+                                            Button(action: {
+                                                print(link.linkUrl)
+                                                openURL(URL(string: link.linkUrl)!)
+                                            }) {
+                                                ZStack{
+                                                    RoundedRectangle(cornerRadius: 5)
+                                                        .frame(width: screenWidth*4/5, height: 30)
+                                                        .foregroundColor(Color("Secondary"))
+                                                    Text(link.linkDescription)
+                                                }
+                                            }
+                                            
+                                            Button(action: {
+                                                userModel.deleteUserLink(linkUrl: link.linkUrl)
+                                            }) {
+                                                Image(systemName: "x.circle.fill")
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            isAddingLink = true
+                        }) {
+                            Text("Add Link")
+                                .padding(.vertical, 10)
+                                .padding(.horizontal)
+                                .background{
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .foregroundColor(Color("Secondary"))
+                                }
+                        }
+                        .sheet(isPresented: $isAddingLink) {
+                            AddLinkView(isAddingLink: $isAddingLink)
+                        }
                     }
+                    .padding()
                 }
+                
             }
             
-            Spacer()
-            
-            Button(action: {
-                isAddingLink = true
-            }) {
-                Text("Add Link")
-                    .padding(.vertical, 10)
-                    .padding(.horizontal)
-                    .background{
-                        RoundedRectangle(cornerRadius: 5)
-                            .foregroundColor(Color("primary"))
-                    }
-            }
-            .sheet(isPresented: $isAddingLink) {
-                AddLinkView(isAddingLink: $isAddingLink)
-            }
-            
-            Spacer()
-                .frame(height: 30)
+            Color.black
+                .frame(height: 5)
         }
+        .navigationBarTitle("Profile")
+        .navigationBarTitleDisplayMode(.large)
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .font(.custom(fontStyle, size: bodyFontSize))
-        .foregroundColor(Color("black"))
-        .navigationBarHidden(true)
+        .foregroundColor(Color("White"))
+        .navigationBarBackButtonHidden(true)
+            .navigationBarItems(
+                leading: Button(action: {  presentationMode.wrappedValue.dismiss() }, label: {
+                    HStack(spacing: 2) {
+                        Image(systemName: "chevron.backward")
+                            .foregroundColor(Color("White"))
+
+                        Text("Back")
+                            .foregroundColor(Color("White"))
+                    }
+                })
+            )
         
     }
 }

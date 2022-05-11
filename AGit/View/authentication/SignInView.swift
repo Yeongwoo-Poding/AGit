@@ -16,51 +16,68 @@ struct SignInView: View {
     @State var isAlert = false
     
     var body: some View {
-        VStack {
-            NavigationBarView(title: "Sign In", hasBackButton: false)
-            
-            VStack(spacing: 30){
-                Spacer()
+        NavigationView {
+            ZStack {
+                Color("Background")
                 
-                HStack {
-                    TextField("email", text: $email)
-                    Text("@pos.idserve.net")
-                }
-                SecureField("password", text: $password){
-                    userModel.signIn(email: email, password: password) { result in
-                        if result{
-                            userModel.loadUser(id: userModel.loginId){_ in}
-                        }else{
-                            isAlert = true
+                VStack(spacing: 20){
+                    Spacer()
+                    
+                    HStack {
+                        TextField("email", text: $email)
+                        Text("@pos.idserve.net")
+                    }
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("Secondary"))
+                    }
+                    
+                    SecureField("password", text: $password){
+                        userModel.signIn(email: email, password: password) { result in
+                            if result{
+                                userModel.loadUser(id: userModel.loginId){_ in}
+                            }else{
+                                isAlert = true
+                            }
                         }
                     }
-                }
-                
-                Button(action: {
-                    userModel.signIn(email: email, password: password) { result in
-                        if result{
-                            userModel.loadUser(id: userModel.loginId) { _ in}
-                        }else{
-                            isAlert = true
-                        }
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("Secondary"))
                     }
-                }) {
-                    Text("Sign In")
-                        .frame(width: 120, height: 50)
-                        .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color("primary"))
+                    
+                    Button(action: {
+                        userModel.signIn(email: email, password: password) { result in
+                            if result{
+                                userModel.loadUser(id: userModel.loginId){_ in}
+                            }else{
+                                isAlert = true
+                            }
                         }
+                    }) {
+                        Text("Sign In")
+                            .foregroundColor(Color("Black"))
+                            .padding()
+                            .padding(.horizontal)
+                            .background{
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundColor(Color("Primary"))
+                            }
+                    }
+                    
+                    Spacer()
+                    
+                    Button(action: {
+                        isSignUpView = true
+                    }) {
+                        Text("Sign Up")
+                    }
                 }
-                
-                Spacer()
-                Button(action: {
-                    isSignUpView = true
-                }) {
-                    Text("Sign Up")
-                }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Sign In")
         }
         .sheet(isPresented: $isSignUpView){
             SignUpView()
@@ -69,7 +86,7 @@ struct SignInView: View {
             Text("계정이 없습니다.")
         }
         .font(.custom(fontStyle, size: bodyFontSize))
-        .foregroundColor(Color("black"))
+        .foregroundColor(Color("White"))
     }
 }
 

@@ -15,46 +15,64 @@ struct SignUpView: View {
     @State var password = ""
     
     var body: some View {
-        VStack {
-            NavigationBarView(title: "Sign Up", hasBackButton: true)
-            
-            VStack(spacing: 30){
-                Spacer()
+        NavigationView {
+            ZStack {
+                Color("Background")
                 
-                TextField("nickname", text: $nickname)
-                HStack {
-                    TextField("email", text: $email)
-                    Text("@pos.idserve.net")
-                }
-                SecureField("password", text: $password){
-                    userModel.signUp(nickname: nickname, email: email, password: password) { result in
-                        if result{
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }
-                
-                Button(action: {
-                    userModel.signUp(nickname: nickname, email: email, password: password) { result in
-                        if result{
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
-                }) {
-                    Text("Sign Up")
-                        .frame(width: 120, height: 50)
+                VStack(spacing: 20){
+                    TextField("nickname", text: $nickname)
+                        .padding()
                         .background{
-                            RoundedRectangle(cornerRadius: 10)
-                                .foregroundColor(Color("primary"))
+                            RoundedRectangle(cornerRadius: 20)
+                                .foregroundColor(Color("Secondary"))
                         }
+                    
+                    HStack {
+                        TextField("email", text: $email)
+                        Text("@pos.idserve.net")
+                    }
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("Secondary"))
+                    }
+                    
+                    SecureField("password", text: $password){
+                        userModel.signUp(nickname: nickname, email: email, password: password) { result in
+                            if result{
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    }
+                    .padding()
+                    .background{
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(Color("Secondary"))
+                    }
+                    
+                    Button(action: {
+                        userModel.signUp(nickname: nickname, email: email, password: password) { result in
+                            if result{
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
+                    }) {
+                        Text("Sign Up")
+                            .foregroundColor(Color("Black"))
+                            .padding()
+                            .padding(.horizontal)
+                            .background{
+                                RoundedRectangle(cornerRadius: 20)
+                                    .foregroundColor(Color("Primary"))
+                            }
+                    }
                 }
-                
-                Spacer()
+                .padding()
             }
-            .padding()
+            .navigationTitle("Sign Up")
         }
         .font(.custom(fontStyle, size: bodyFontSize))
-        .foregroundColor(Color("black"))
+        .foregroundColor(Color("White"))
     }
 }
 

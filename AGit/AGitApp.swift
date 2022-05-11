@@ -25,25 +25,21 @@ struct AGitApp: App {
                         
                         print("DEBUG: \(userModel.loginId)")
                         
-//                        userModel.loadUserList()
-                        
-                        if userModel.loginId != 0{
-                            userModel.loadUser(id: userModel.loginId){ result in
-                                if result{
-                                    withAnimation {
+                        let _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                            if userModel.loginId != 0{
+                                userModel.loadUser(id: userModel.loginId){ result in
+                                    if result{
+                                        withAnimation {
+                                            isLaunchScreen = false
+                                        }
+                                    }else{
+                                        userModel.loginId = 0
                                         isLaunchScreen = false
                                     }
-                                }else{
-                                    
-                                    DispatchQueue.main.async {
-                                        userModel.loginId = 0
-                                    }
-                                    
-                                    isLaunchScreen = false
                                 }
+                            }else{
+                                isLaunchScreen = false
                             }
-                        }else{
-                            isLaunchScreen = false
                         }
                     }
                     .environmentObject(userModel)

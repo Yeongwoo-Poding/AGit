@@ -323,7 +323,8 @@ class UserModel: ObservableObject{
             let url = URL(string: "\(domain)/AddLink.php")!
             print(url)
             
-            let postData: [String : String] = ["id": String(self.user!.id), "linkType": linkType, "linkDescription": linkDescription, "linkUrl": linkUrl]
+//            let postData: [String : String] = ["id": String(self.user!.id), "linkType": linkType, "linkDescription": linkDescription, "linkUrl": linkUrl]
+            let postData: [String : String] = ["id": String(self.user!.id), "linkType": "", "linkDescription": linkDescription, "linkUrl": linkUrl]
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
